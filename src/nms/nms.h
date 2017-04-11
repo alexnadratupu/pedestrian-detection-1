@@ -11,15 +11,32 @@
  */
 
 
- #ifndef NMS_DEFINE_H
- #define NMS_DEFINE_H
- namespace pd {
- 
- class CNms {
+#ifndef NMS_DEFINE_H
+#define NMS_DEFINE_H
+
+#include <vector>
+
+namespace pd {
+
+
+class CNms {
+
+public:
+	CNms()
+	{
+
+	}
+
+	~CNms()
+	{
+
+	}
+
+private:
 
 
 
- };
- }
+};
+}
  
  #endif
