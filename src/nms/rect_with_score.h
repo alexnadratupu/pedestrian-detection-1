@@ -25,7 +25,7 @@ public:
 	}
 
 private:
-	Rect m_rect;
+	cv::Rect m_rect;
 	double m_score;
 };
 }
