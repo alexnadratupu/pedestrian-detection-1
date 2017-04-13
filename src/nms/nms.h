@@ -15,6 +15,7 @@
 #define NMS_DEFINE_H
 
 #include <vector>
+#include "rect_with_score.h"
 
 namespace pd {
 
@@ -22,20 +23,17 @@ namespace pd {
 class CNms {
 
 public:
-	CNms()
-	{
-
-	}
-
-	~CNms()
-	{
-
-	}
+	CNms();
+	~CNms();
+	int AddPossibleTargetRects(std::vector<CRectWithScore&> possible_rects);
+	std::vector<CRectWithScore&>* DoNms();
 
 private:
+	double CalculateOverlap(CRectWithScore& rect1, CRectWithScore& rect2);
 
-
-
+private:
+	std::vector<CRectWithScore&> m_possible_target_rects;
+	void sort(std::vector<CRectWithScore&>& rects);
 };
 }
  
