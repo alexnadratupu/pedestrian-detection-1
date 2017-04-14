@@ -8,18 +8,42 @@
 
 namespace pd{
 
+CRectWithScore::CRectWithScore()
+{
+	m_rect.x = 0;
+	m_rect.y = 0;
+	m_rect.width = 0;
+	m_rect.height = 0;
+	m_top_left_point = new cv::Point();
+}
+
 CRectWithScore::CRectWithScore(int x, int y, int width, int height)
 {
 	m_rect.x = x;
 	m_rect.y = y;
 	m_rect.width = width;
 	m_rect.height = height;
+	m_top_left_point = new cv::Point();
 }
 
-CRectWithScore::CRectWithScore(const CRectWithScore& r)
+CRectWithScore::~CRectWithScore()
 {
-	m_rect = r.m_rect;
-	m_score = r.m_score;
+	delete m_top_left_point;
+}
+
+cv::Point* CRectWithScore::GetTopLeftPoint()
+{
+	return m_top_left_point;
+}
+
+int CRectWithScore::GetWidth()
+{
+	return m_rect.width;
+}
+
+int CRectWithScore::GetHeight()
+{
+	return m_rect.height;
 }
 
 }

@@ -25,15 +25,15 @@ class CNms {
 public:
 	CNms();
 	~CNms();
-	int AddPossibleTargetRects(std::vector<CRectWithScore&> possible_rects);
-	std::vector<CRectWithScore&>* DoNms();
+	int AddPossibleTargetRects(std::vector<CRectWithScore*> possible_rects);
+	std::vector<CRectWithScore*>* DoNms();
 
 private:
-	double CalculateOverlap(CRectWithScore& rect1, CRectWithScore& rect2);
+	int CalculateOverlap(CRectWithScore& rect1, CRectWithScore& rect2);
+	void sort(std::vector<CRectWithScore*>* rects);
 
 private:
-	std::vector<CRectWithScore&> m_possible_target_rects;
-	void sort(std::vector<CRectWithScore&>& rects);
+	std::vector<CRectWithScore*> m_possible_target_rects;
 };
 }
  

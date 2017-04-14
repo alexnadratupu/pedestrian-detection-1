@@ -9,6 +9,7 @@
 #ifndef RECT_WITH_SCORE_H
 #define RECT_WITH_SCORE_H
 
+
 #include "opencv2/core/core.hpp"
 namespace pd {
 
@@ -16,16 +17,18 @@ class CRectWithScore {
 
 public:
 	CRectWithScore();
-	CRectWithScore::CRectWithScore(int x, int y, int width, int height);
-	CRectWithScore(const CRectWithScore& r);
+	CRectWithScore(int x, int y, int width, int height);
 
-	~CRectWithScore()
-	{
+	~CRectWithScore();
 
-	}
+	cv::Point* GetTopLeftPoint();
+
+	int GetWidth();
+	int GetHeight();
 
 private:
 	cv::Rect m_rect;
+	cv::Point* m_top_left_point;
 	double m_score;
 };
 }
