@@ -46,4 +46,9 @@ int CRectWithScore::GetHeight()
 	return m_rect.height;
 }
 
+double CRectWithScore::GetScore()
+{
+	return m_score;
+}
+
 }

@@ -28,9 +28,10 @@ public:
 	int AddPossibleTargetRects(std::vector<CRectWithScore*> possible_rects);
 	std::vector<CRectWithScore*>* DoNms();
 
+	bool Compare(CRectWithScore* a, CRectWithScore* b);
+
 private:
 	int CalculateOverlap(CRectWithScore& rect1, CRectWithScore& rect2);
-	void sort(std::vector<CRectWithScore*>* rects);
 
 private:
 	std::vector<CRectWithScore*> m_possible_target_rects;

@@ -5,6 +5,7 @@
  */
 
 #include "nms.h"
+#include <algorithm>
 using namespace pd;
  
 CNms::CNms()
@@ -31,6 +32,17 @@ int CNms::AddPossibleTargetRects(std::vector<CRectWithScore*> possible_rects)
 	return 0;
 }
 
+bool CNms::Compare(CRectWithScore* a, CRectWithScore* b)
+{
+	if (a->GetScore() >= b->GetScore())
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 std::vector<CRectWithScore*>* CNms::DoNms()
 {
 	if (0 == m_possible_target_rects.size())
@@ -38,12 +50,11 @@ std::vector<CRectWithScore*>* CNms::DoNms()
 		return NULL;
 	}
 
-	std::vector<CRectWithScore*>* result_rects = new std::vector<CRectWithScore*>();
-
 	// ≈≈–Ú
-
+	sort(m_possible_target_rects.begin(), m_possible_target_rects.end());
 
 	// 
+
 
 }
 
@@ -79,10 +90,4 @@ int CNms::CalculateOverlap(CRectWithScore& rect1, CRectWithScore& rect2)
 
 	int overlap = (overlap_bottom_right_x - overlap_top_left_x) * (overlap_bottom_right_y - overlap_top_left_y);
 	return overlap;
-}
-
-void CNms::sort(std::vector<CRectWithScore*>* rects)
-{
-
-
 }
