@@ -1,5 +1,5 @@
 /*
- * 非最大抑制类实现
+ * implementation of nms
  * Copyright @ 2017-2037 chao deng
  *
  */
@@ -10,6 +10,7 @@ using namespace pd;
  
 CNms::CNms()
 {
+
 }
 
 CNms::~CNms()
@@ -43,32 +44,47 @@ bool CNms::Compare(CRectWithScore* a, CRectWithScore* b)
 	}
 }
 
-std::vector<CRectWithScore*>* CNms::DoNms()
+std::vector<CRectWithScore*>* CNms::DoNms(double overlap_threshold)
 {
 	if (0 == m_possible_target_rects.size())
 	{
 		return NULL;
 	}
 
-	// 排序
-	sort(m_possible_target_rects.begin(), m_possible_target_rects.end());
+	while (m_possible_target_rects.size() > 0)
+	{
+		// sort decreasing
+		sort(m_possible_target_rects.begin(), m_possible_target_rects.end());
 
-	// 
+		// get the rect with the max score
+		CRectWithScore* rect_with_max_score = *m_possible_target_rects.begin();
+		m_result_rects.push_back(rect_with_max_score);
+		m_possible_target_rects.erase(m_possible_target_rects.begin());
 
-
+		// calculate the overlap of the max score rect with the other rects
+		for (std::vector<CRectWithScore*>::iterator iter = m_possible_target_rects.begin(); iter < m_possible_target_rects.end(); iter++)
+		{
+			double overlap = CalculateOverlap(rect_with_max_score, *iter);
+			if (overlap < overlap_threshold)
+			{
+				// shouldn't delete when traversal of the vector
+				m_possible_target_rects.erase(iter);
+			}
+		}
+	}
 }
 
-int CNms::CalculateOverlap(CRectWithScore& rect1, CRectWithScore& rect2)
+int CNms::CalculateOverlap(CRectWithScore* rect1, CRectWithScore* rect2)
 {
-	int rect1_top_left_x = rect1.GetTopLeftPoint()->x; 
-	int rect1_top_left_y = rect1.GetTopLeftPoint()->y;
-	int rect1_bottom_right_x = rect1_top_left_x + rect1.GetWidth();
-	int rect1_bottom_right_y = rect1_top_left_y - rect1.GetHeight();
+	int rect1_top_left_x = rect1->GetTopLeftPoint()->x; 
+	int rect1_top_left_y = rect1->GetTopLeftPoint()->y;
+	int rect1_bottom_right_x = rect1_top_left_x + rect1->GetWidth();
+	int rect1_bottom_right_y = rect1_top_left_y - rect1->GetHeight();
 
-	int rect2_top_left_x = rect2.GetTopLeftPoint()->x;
-	int rect2_top_left_y = rect2.GetTopLeftPoint()->y;
-	int rect2_bottom_right_x = rect1_top_left_x + rect2.GetWidth();
-	int rect2_bottom_right_y = rect1_top_left_y - rect2.GetHeight();
+	int rect2_top_left_x = rect2->GetTopLeftPoint()->x;
+	int rect2_top_left_y = rect2->GetTopLeftPoint()->y;
+	int rect2_bottom_right_x = rect1_top_left_x + rect2->GetWidth();
+	int rect2_bottom_right_y = rect1_top_left_y - rect2->GetHeight();
 
 	// no overlap 
 	// x-axis

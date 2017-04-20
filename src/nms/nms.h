@@ -26,15 +26,16 @@ public:
 	CNms();
 	~CNms();
 	int AddPossibleTargetRects(std::vector<CRectWithScore*> possible_rects);
-	std::vector<CRectWithScore*>* DoNms();
+	std::vector<CRectWithScore*>* DoNms(double overlap_threshold);
 
 	bool Compare(CRectWithScore* a, CRectWithScore* b);
 
 private:
-	int CalculateOverlap(CRectWithScore& rect1, CRectWithScore& rect2);
+	int CalculateOverlap(CRectWithScore* rect1, CRectWithScore* rect2);
 
 private:
 	std::vector<CRectWithScore*> m_possible_target_rects;
+	std::vector<CRectWithScore*> m_result_rects;
 };
 }
  

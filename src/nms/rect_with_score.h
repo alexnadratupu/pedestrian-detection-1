@@ -27,8 +27,8 @@ public:
 	int GetHeight();
 	double GetScore();
 
-	bool operator < (const CRectWithScore &m)const {
-		return m_score < m.m_score;
+	bool operator > (const CRectWithScore &m)const {
+		return m_score > m.m_score;
 	}
 
 private:
