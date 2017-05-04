@@ -5,7 +5,7 @@
 #include "nms.h"
 #include "rect_with_score.h"
 #include "opencv2/highgui/highgui.hpp"
-
+#include "opencv2/core/core.hpp"
 
 int main(int argc, char* argv[])
 {
