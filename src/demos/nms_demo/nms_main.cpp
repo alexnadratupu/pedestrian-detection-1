@@ -22,7 +22,8 @@ int main(int argc, char* argv[])
 	cv::Rect detect_window8(100, 30, 60, 70);
 	cv::Rect detect_window9(110, 32, 60, 70);
 
-	cv::Mat image(200, 200, CV_8UC3, cv::Scalar(0));
+	cv::Mat image(400, 400, CV_8UC3, cv::Scalar(0));
+	cv::rectangle(image, detect_window1, cv::Scalar(0, 255, 255));
 
 	cv::imshow("rectangles", image);
 	cv::waitKey();
