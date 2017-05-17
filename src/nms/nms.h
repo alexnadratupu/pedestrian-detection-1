@@ -26,7 +26,7 @@ public:
 	CNms();
 	~CNms();
 	int AddPossibleTargetRects(std::vector<CRectWithScore*> possible_rects);
-	std::vector<CRectWithScore*>* DoNms(double overlap_threshold);
+	void DoNms(double overlap_threshold, std::vector<cv::Rect*>& result_rect);
 
 	bool Compare(CRectWithScore* a, CRectWithScore* b);
 

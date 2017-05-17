@@ -18,6 +18,7 @@ class CRectWithScore {
 public:
 	CRectWithScore();
 	CRectWithScore(int x, int y, int width, int height);
+	CRectWithScore(cv::Rect& rect);
 
 	~CRectWithScore();
 

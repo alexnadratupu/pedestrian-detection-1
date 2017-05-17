@@ -44,11 +44,11 @@ bool CNms::Compare(CRectWithScore* a, CRectWithScore* b)
 	}
 }
 
-std::vector<CRectWithScore*>* CNms::DoNms(double overlap_threshold)
+void CNms::DoNms(double overlap_threshold, std::vector<cv::Rect*>& result_rect)
 {
 	if (0 == m_possible_target_rects.size())
 	{
-		return NULL;
+		return;
 	}
 
 	while (m_possible_target_rects.size() > 0)
@@ -58,7 +58,9 @@ std::vector<CRectWithScore*>* CNms::DoNms(double overlap_threshold)
 
 		// get the rect with the max score
 		CRectWithScore* rect_with_max_score = *m_possible_target_rects.begin();
-		m_result_rects.push_back(rect_with_max_score);
+		cv::Rect* selected_rect = new cv::Rect(rect_with_max_score->GetTopLeftPoint()->x, rect_with_max_score->GetTopLeftPoint()->y, 
+			rect_with_max_score->GetWidth(), rect_with_max_score->GetHeight());
+		result_rect.push_back(selected_rect);
 		m_possible_target_rects.erase(m_possible_target_rects.begin());
 
 		// calculate the overlap of the max score rect with the other rects

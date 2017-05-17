@@ -26,6 +26,15 @@ CRectWithScore::CRectWithScore(int x, int y, int width, int height)
 	m_top_left_point = new cv::Point();
 }
 
+CRectWithScore::CRectWithScore(cv::Rect& rect)
+{
+	m_rect.x = rect.x;
+	m_rect.y = rect.y;
+	m_rect.width = rect.width;
+	m_rect.height = rect.height;
+	m_top_left_point = new cv::Point();
+}
+
 CRectWithScore::~CRectWithScore()
 {
 	delete m_top_left_point;
